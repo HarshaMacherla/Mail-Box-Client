@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Form, Container } from "react-bootstrap";
 
 const Signup = () => {
   const emailRef = useRef();
@@ -38,19 +39,23 @@ const Signup = () => {
       console.log("Registered Successfully!");
       console.log(responseData);
     } catch (error) {
-      alert(error.message);
+      if (error.message === "EMAIL_EXISTS") {
+        alert("Email already exists! Login");
+      } else {
+        alert(error.message);
+      }
     }
   };
 
   return (
     <>
-      <div className="container border rounded mt-5 p-4">
-        <form onSubmit={handleSignUp}>
+      <Container className="border rounded mt-5 p-4">
+        <Form onSubmit={handleSignUp}>
           <div className="container text-center pb-2">
             <h3>Mail Box Client Registration</h3>
           </div>
           <div className="form-floating">
-            <input
+            <Form.Control
               type="email"
               id="email"
               className="form-control"
@@ -64,7 +69,7 @@ const Signup = () => {
           </div>
 
           <div className="form-floating">
-            <input
+            <Form.Control
               type="password"
               id="password"
               className="form-control"
@@ -76,7 +81,7 @@ const Signup = () => {
           </div>
 
           <div className="form-floating">
-            <input
+            <Form.Control
               type="password"
               id="confirm-password"
               className="form-control"
@@ -87,17 +92,17 @@ const Signup = () => {
             <label htmlFor="confirm-password">Confirm Password</label>
           </div>
 
-          <div className="container text-center mt-3">
+          <Container className="text-center mt-3">
             <button className="btn btn-dark" type="submit">
               SignUp
             </button>
-          </div>
-        </form>
-      </div>
+          </Container>
+        </Form>
+      </Container>
 
-      <div className="container d-grid gap-2 mt-4 mx-5 mx-auto">
+      <Container className="d-grid gap-2 mt-4 mx-5 mx-auto">
         <button className="btn btn-outline-dark">Have an account? Login</button>
-      </div>
+      </Container>
     </>
   );
 };

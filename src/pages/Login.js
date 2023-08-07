@@ -4,29 +4,20 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { authActions } from "../store/AuthSlice";
 
-const Signup = () => {
+const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
 
   const history = useHistory();
 
   const dispatch = useDispatch();
 
-  const handleSignUp = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-
-    if (
-      passwordRef.current.value.trim() !==
-      confirmPasswordRef.current.value.trim()
-    ) {
-      alert("Passwords didn't match");
-      return;
-    }
 
     try {
       const response = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=        AIzaSyBCxjcQDhQzoAPONn2lyB1YlxoU8sPPCYk",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBCxjcQDhQzoAPONn2lyB1YlxoU8sPPCYk",
         {
           method: "POST",
           headers: {
@@ -45,27 +36,27 @@ const Signup = () => {
       const responseData = await response.json();
       localStorage.setItem("idToken", responseData.idToken);
       dispatch(authActions.login());
-      console.log("Registered Successfully!");
+      console.log("Login Successful!");
       console.log(responseData);
     } catch (error) {
-      if (error.message === "EMAIL_EXISTS") {
-        alert("Email already exists! Login");
+      if (error.message === "EMAIL_NOT_FOUND") {
+        alert("YOU HAVEN'T REGISTERED. PLEASE SIGNUP!");
       } else {
         alert(error.message);
       }
     }
   };
 
-  const handleSwitchToLogin = () => {
-    history.push("/login");
+  const handleSwitchToSignup = () => {
+    history.push("/signup");
   };
 
   return (
     <>
       <Container className="border border-dark rounded mt-5 p-4">
-        <Form onSubmit={handleSignUp}>
+        <Form onSubmit={handleLogin}>
           <div className="container text-center pb-2">
-            <h3>Mail Box Client Registration</h3>
+            <h3>Mail Box Client Login</h3>
           </div>
           <div className="form-floating">
             <Form.Control
@@ -86,40 +77,28 @@ const Signup = () => {
               type="password"
               id="password"
               className="form-control"
-              placeholder="Create a Password"
+              placeholder="Enter your password"
               required
               ref={passwordRef}
             />
             <label htmlFor="password">Password</label>
           </div>
 
-          <div className="form-floating">
-            <Form.Control
-              type="password"
-              id="confirm-password"
-              className="form-control"
-              placeholder="Confirm Password"
-              required
-              ref={confirmPasswordRef}
-            />
-            <label htmlFor="confirm-password">Confirm Password</label>
-          </div>
-
           <Container className="text-center mt-3">
             <button className="btn btn-dark" type="submit">
-              SignUp
+              Login
             </button>
           </Container>
         </Form>
       </Container>
 
       <Container className="d-grid gap-2 mt-4 mx-5 mx-auto">
-        <button className="btn btn-dark" onClick={handleSwitchToLogin}>
-          Have an account? Login
+        <button className="btn btn-dark" onClick={handleSwitchToSignup}>
+          Don't have an account? SignUp
         </button>
       </Container>
     </>
   );
 };
 
-export default Signup;
+export default Login;

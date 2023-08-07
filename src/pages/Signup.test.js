@@ -28,7 +28,7 @@ describe("Signup Component", () => {
 
   test("renders 'Login'", () => {
     render(<Signup />);
-    const loginElement = screen.getByText(/login/i);
+    const loginElement = screen.getByText(/signup/i);
     expect(loginElement).toBeInTheDocument();
   });
 });

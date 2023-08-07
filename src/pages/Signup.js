@@ -49,7 +49,7 @@ const Signup = () => {
 
   return (
     <>
-      <Container className="border rounded mt-5 p-4">
+      <Container className="border border-dark rounded mt-5 p-4">
         <Form onSubmit={handleSignUp}>
           <div className="container text-center pb-2">
             <h3>Mail Box Client Registration</h3>
@@ -101,7 +101,7 @@ const Signup = () => {
       </Container>
 
       <Container className="d-grid gap-2 mt-4 mx-5 mx-auto">
-        <button className="btn btn-outline-dark">Have an account? Login</button>
+        <button className="btn btn-dark">Have an account? Login</button>
       </Container>
     </>
   );

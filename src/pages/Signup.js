@@ -44,6 +44,10 @@ const Signup = () => {
       }
       const responseData = await response.json();
       localStorage.setItem("idToken", responseData.idToken);
+      localStorage.setItem(
+        "userId",
+        emailRef.current.value.trim().replace(/[@.]/g, "")
+      );
       dispatch(authActions.login());
       console.log("Registered Successfully!");
       console.log(responseData);

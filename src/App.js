@@ -15,13 +15,31 @@ function App() {
     <>
       <Switch>
         <Route path="/" exact>
+          {loggedIn ? <Redirect to="/inbox" /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/compose-email" exact>
+          {loggedIn ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/inbox" exact>
+          {loggedIn ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/sent" exact>
+          {loggedIn ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/archive" exact>
+          {loggedIn ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/spam" exact>
+          {loggedIn ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/trash" exact>
           {loggedIn ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route path="/login" exact>
-          {!loggedIn ? <Login /> : <Redirect to="/" />}
+          {!loggedIn ? <Login /> : <Redirect to="/inbox" />}
         </Route>
         <Route path="/signup" exact>
-          {!loggedIn ? <Signup /> : <Redirect to="/" />}
+          {!loggedIn ? <Signup /> : <Redirect to="/inbox" />}
         </Route>
       </Switch>
     </>

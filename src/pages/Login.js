@@ -44,7 +44,7 @@ const Login = () => {
       console.log(responseData);
     } catch (error) {
       if (error.message === "EMAIL_NOT_FOUND") {
-        alert("YOU HAVEN'T REGISTERED. PLEASE SIGNUP!");
+        alert("YOU DON'T HAVE AN ACCOUNT. PLEASE REGISTER!");
       } else {
         alert(error.message);
       }

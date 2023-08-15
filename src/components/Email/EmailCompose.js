@@ -96,52 +96,55 @@ function EmailCompose() {
   };
 
   return (
-    <div className="border rounded m-3 p-4">
-      <Form onSubmit={handleSendMail}>
-        <div>
-          <label htmlFor="email">
-            <strong>To</strong>
-          </label>
-          <Form.Control
-            type="email"
-            id="email"
-            className="form-control"
-            placeholder="example@email.com"
-            required
-            ref={recipientRef}
+    <>
+      <div className="m-5">
+        <h3 className="mb-3 text-center">Compose Mail</h3>
+        <Form onSubmit={handleSendMail} className="border rounded p-4">
+          <div>
+            <label htmlFor="email">
+              <strong>To</strong>
+            </label>
+            <Form.Control
+              type="email"
+              id="email"
+              className="form-control"
+              placeholder="example@email.com"
+              required
+              ref={recipientRef}
+            />
+            <div className="invalid-feedback">Invalid email</div>
+            <div className="valid-feedback">Valid email</div>
+          </div>
+
+          <div className="my-3">
+            <label htmlFor="emailSubject">
+              <strong>Subject</strong>
+            </label>
+            <Form.Control
+              type="text"
+              id="emailSubject"
+              className="form-control"
+              placeholder="Enter subject"
+              required
+              ref={subjectRef}
+            />
+          </div>
+
+          <Editor
+            editorState={editorContent}
+            onEditorStateChange={onEditorStateChange}
+            placeholder="Email Body"
           />
-          <div className="invalid-feedback">Invalid email</div>
-          <div className="valid-feedback">Valid email</div>
-        </div>
 
-        <div className="my-3">
-          <label htmlFor="emailSubject">
-            <strong>Subject</strong>
-          </label>
-          <Form.Control
-            type="text"
-            id="emailSubject"
-            className="form-control"
-            placeholder="Enter subject"
-            required
-            ref={subjectRef}
-          />
-        </div>
+          <hr />
 
-        <Editor
-          editorState={editorContent}
-          onEditorStateChange={onEditorStateChange}
-          placeholder="Email Body"
-        />
-
-        <hr />
-
-        <div className="text-center mt-3">
-          <button className="btn btn-dark" type="submit">
-            Send Email
-          </button>
-        </div>
-      </Form>
+          <div className="text-center mt-3">
+            <button className="btn btn-dark" type="submit">
+              Send Email
+            </button>
+          </div>
+        </Form>
+      </div>
 
       <Modal show={showConfirmation} onHide={() => setShowConfirmation(false)}>
         <Modal.Header closeButton>
@@ -171,7 +174,7 @@ function EmailCompose() {
           </button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 }
 

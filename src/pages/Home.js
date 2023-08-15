@@ -1,11 +1,11 @@
-import MyEditor from "../components/EmailCompose";
+import EmailExplorer from "../components/Email/EmailExplorer";
 import NavBar from "../components/NavBar";
 
 const Home = () => {
   return (
     <>
       <NavBar />
-      <MyEditor />
+      <EmailExplorer />
     </>
   );
 };

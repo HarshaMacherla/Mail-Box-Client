@@ -4,10 +4,21 @@ const InboxSlice = createSlice({
   name: "inbox",
   initialState: {
     inbox: [],
+    unread: 0,
   },
   reducers: {
     storeEmail(state, action) {
       state.inbox.push(action.payload);
+    },
+    editEmail(state, action) {
+      state.inbox = state.inbox.map((email) => {
+        if (email.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return email;
+        }
+      });
+      state.unread--;
     },
     deleteEmail(state, action) {
       state.inbox = state.inbox.filter(
@@ -15,7 +26,8 @@ const InboxSlice = createSlice({
       );
     },
     loadEmails(state, action) {
-      state.inbox = action.payload;
+      state.inbox = action.payload.emails;
+      state.unread = action.payload.unread;
     },
   },
 });

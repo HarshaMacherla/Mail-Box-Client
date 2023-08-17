@@ -3,10 +3,14 @@ import { Editor } from "react-draft-wysiwyg";
 import { Form, Modal } from "react-bootstrap";
 import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useDispatch } from "react-redux";
+import { sentActions } from "../../store/Email/SentSlice";
 
 function EmailCompose() {
   const recipientRef = useRef();
   const subjectRef = useRef();
+
+  const dispatch = useDispatch();
 
   const [editorContent, setEditorContent] = useState(EditorState.createEmpty());
 
@@ -33,7 +37,7 @@ function EmailCompose() {
 
   const sendEmail = async (recipient, subject, body) => {
     const recepientData = {
-      from: localStorage.getItem("userId"),
+      from: localStorage.getItem("emailId"),
       subject,
       body,
     };
@@ -62,7 +66,7 @@ function EmailCompose() {
         `https://mail-box-client-5e320-default-rtdb.asia-southeast1.firebasedatabase.app/${recipient}/mailbox/inbox.json`,
         {
           method: "POST",
-          body: JSON.stringify(recepientData),
+          body: JSON.stringify({ ...recepientData, read: false }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -79,10 +83,16 @@ function EmailCompose() {
       }
 
       const senderResponseData = await senderResponse.json();
-      const recepientResponseData = await recepientResponse.json();
 
       console.log(senderResponseData);
-      console.log(recepientResponseData);
+      dispatch(
+        sentActions.storeEmail({
+          id: senderResponseData.name,
+          to: recipient,
+          subject,
+          body,
+        })
+      );
 
       recipientRef.current.value = "";
       subjectRef.current.value = "";

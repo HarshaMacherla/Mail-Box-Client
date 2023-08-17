@@ -41,6 +41,12 @@ function App() {
         <Route path="/signup" exact>
           {!loggedIn ? <Signup /> : <Redirect to="/inbox" />}
         </Route>
+        <Route path="/inbox/view-mail/:mailId" exact>
+          <Home />
+        </Route>
+        <Route path="/sent/view-mail/:mailId" exact>
+          <Home />
+        </Route>
       </Switch>
     </>
   );

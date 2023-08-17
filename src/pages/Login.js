@@ -39,6 +39,7 @@ const Login = () => {
         "userId",
         emailRef.current.value.trim().replace(/[@.]/g, "")
       );
+      localStorage.setItem("emailId", emailRef.current.value.trim());
       dispatch(authActions.login());
       console.log("Login Successful!");
       console.log(responseData);

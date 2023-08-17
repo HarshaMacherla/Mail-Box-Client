@@ -48,6 +48,7 @@ const Signup = () => {
         "userId",
         emailRef.current.value.trim().replace(/[@.]/g, "")
       );
+      localStorage.setItem("emailId", emailRef.current.value.trim());
       dispatch(authActions.login());
       console.log("Registered Successfully!");
       console.log(responseData);

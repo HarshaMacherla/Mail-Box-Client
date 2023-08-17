@@ -1,0 +1,21 @@
+.unread {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(62, 103, 192);
+  margin-right: 8px;
+  display: inline-block !important;
+}
+
+.read {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: light;
+  margin-right: 8px;
+  display: inline-block !important;
+}
+
+tr:hover {
+  cursor: pointer;
+}

@@ -7,6 +7,8 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("idToken");
+    localStorage.removeItem("emailId");
+    localStorage.removeItem("userId");
     dispatch(authActions.logout());
   };
 

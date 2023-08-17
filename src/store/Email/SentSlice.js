@@ -12,6 +12,9 @@ const SentSlice = createSlice({
     deleteEmail(state, action) {
       state.sent = state.sent((email) => email.id !== action.payload.id);
     },
+    loadEmails(state, action) {
+      state.sent = action.payload;
+    },
   },
 });
 

@@ -4,7 +4,11 @@ import inboxReducer from "./Email/InboxSlice";
 import sentReducer from "./Email/SentSlice";
 
 const store = configureStore({
-  reducer: { auth: authReducer, inbox: inboxReducer, sent: sentReducer },
+  reducer: {
+    auth: authReducer,
+    inbox: inboxReducer,
+    sent: sentReducer,
+  },
 });
 
 export default store;

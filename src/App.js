@@ -29,12 +29,6 @@ function App() {
         <Route path="/archive" exact>
           {loggedIn ? <Home /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/spam" exact>
-          {loggedIn ? <Home /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/trash" exact>
-          {loggedIn ? <Home /> : <Redirect to="/login" />}
-        </Route>
         <Route path="/login" exact>
           {!loggedIn ? <Login /> : <Redirect to="/inbox" />}
         </Route>

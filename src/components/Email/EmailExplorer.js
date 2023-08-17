@@ -4,7 +4,6 @@ import EmailCompose from "./EmailCompose";
 import Inbox from "./Inbox";
 import Sent from "./Sent";
 import Archive from "./Archive";
-import Trash from "./Trash";
 import ViewInboxEmail from "./ViewInboxEmail";
 import ViewSentEmail from "./ViewSentEmail";
 import { useSelector } from "react-redux";
@@ -63,15 +62,6 @@ const EmailExplorer = () => {
               Archive
             </p>
           </div>
-          <div onClick={() => handleNavigation("/trash")}>
-            <p
-              className={
-                location.pathname.includes("/trash") ? "highlight" : ""
-              }
-            >
-              Trash
-            </p>
-          </div>
         </div>
       </div>
       <div className="m-0 mx-auto justify-content-center content">
@@ -79,7 +69,6 @@ const EmailExplorer = () => {
         {location.pathname === "/inbox" && <Inbox />}
         {location.pathname === "/sent" && <Sent />}
         {location.pathname === "/archive" && <Archive />}
-        {location.pathname === "/trash" && <Trash />}
         {location.pathname ===
           `/inbox/view-mail/${localStorage.getItem("current-email")}` && (
           <ViewInboxEmail />

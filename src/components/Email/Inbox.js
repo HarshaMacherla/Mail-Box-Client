@@ -13,15 +13,22 @@ const Inbox = () => {
   const inbox = useSelector((state) => state.inbox.inbox);
 
   const receivedEmails = inbox.map((email) => (
-    <tr key={email.id} onClick={() => handleViewEmail(email)}>
-      <td>
+    <tr key={email.id}>
+      <td onClick={() => handleViewEmail(email)}>
         <span className={email.read ? "read" : "unread"}></span>
         {email.subject}
       </td>
-      <td className="text-center">{email.body}</td>
+      <td className="text-center" onClick={() => handleViewEmail(email)}>
+        {email.body}
+      </td>
       <td className="text-end">
         <button className="btn btn-outline-dark btn-sm mx-1">Archive</button>
-        <button className="btn btn-danger btn-sm mx-1">Delete</button>
+        <button
+          className="btn btn-danger btn-sm mx-1"
+          onClick={() => handleDeleteEmail(email)}
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
@@ -46,6 +53,26 @@ const Inbox = () => {
       }
       console.log(responseData);
       dispatch(inboxActions.editEmail({ ...email, read: true }));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleDeleteEmail = async (email) => {
+    try {
+      const response = await fetch(
+        `https://mail-box-client-5e320-default-rtdb.asia-southeast1.firebasedatabase.app/${localStorage.getItem(
+          "userId"
+        )}/mailbox/inbox/${email.id}.json`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.error.message);
+      }
+      dispatch(inboxActions.deleteEmail(email));
     } catch (error) {
       alert(error.message);
     }

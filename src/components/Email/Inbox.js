@@ -116,6 +116,16 @@ const Inbox = () => {
     if (!!localStorage.getItem("idToken")) {
       fetchInbox();
     }
+
+    const refreshInterval = setInterval(() => {
+      if (!!localStorage.getItem("idToken")) {
+        fetchInbox();
+      }
+    }, 5000);
+
+    return () => {
+      clearInterval(refreshInterval);
+    };
   }, [dispatch]);
 
   return (

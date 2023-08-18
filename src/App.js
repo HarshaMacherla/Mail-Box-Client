@@ -7,12 +7,14 @@ import Signup from "./pages/Signup";
 import { useSelector } from "react-redux";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import CustomHook from "./components/CustomHooks/CustomHook";
 
 function App() {
   const loggedIn = useSelector((state) => state.auth.loggedIn);
 
   return (
     <>
+      <CustomHook />
       <Switch>
         <Route path="/" exact>
           {loggedIn ? <Redirect to="/inbox" /> : <Redirect to="/login" />}

@@ -1,7 +1,7 @@
 const Archive = () => {
   return (
     <>
-      <h3>Inside Archive</h3>
+      <h3>There are no emails in the archive!</h3>
     </>
   );
 };

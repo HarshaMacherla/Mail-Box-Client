@@ -73,7 +73,10 @@ const EmailExplorer = () => {
           `/inbox/view-mail/${localStorage.getItem("current-email")}` && (
           <ViewInboxEmail />
         )}
-        {location.pathname === "/sent/viewMail/*" && <ViewSentEmail />}
+        {location.pathname ===
+          `/sent/view-mail/${localStorage.getItem("current-email")}` && (
+          <ViewSentEmail />
+        )}
       </div>
     </div>
   );
